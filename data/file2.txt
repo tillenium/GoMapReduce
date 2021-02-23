@@ -1,0 +1,1 @@
+My binaries end up in the src folder and I have no idea why. I want them to end up in gopath/bin (since that is the default? and since I don't want binaries on git). The packages end up in gopath/pkg with their binaries in their respective folder. I don't even know if this folder structure is considered good.
