@@ -14,3 +14,7 @@ make build
 ./build/bin/gomr examples/word_count.so data/file1.txt data/file2.txt
 ```
 
+### Design Docs
+```shell
+Design Docs are under ./docs folder.
+```

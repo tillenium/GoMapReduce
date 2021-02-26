@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor user as u
+collections workers as w
+participant controller as c
+
+u -> c : gomr controller <files> (starts the controller server)
+u -> w : gomr workers <map_reduce_exec>.so (starts the workers)
+loop CheckForMapTasksCompletion
+    w -> c : QueryMapTasksStatus
+
+    alt Map Task Available
+        w -> c : GetMapTask
+        w -> w : executes Map Function
+        w -> c : UpdateMapTaskAsComplete
+    else
+        w -> w: Exists Map Tasks loop
+    end
+end
+
+c -> c: Combines and Sorts the Map tasks output files into nReduce files.
+
+loop CheckForReduceTasksCompletion
+    w -> c : QueryReduceTasksStatus
+
+    alt Map Task Available
+        w -> c : GetReduceTask
+        w -> w : executes Reduce Function
+        w -> c : UpdateReduceTaskAsComplete
+    else
+        w -> w: Exists Map Tasks loop
+    end
+end
+
+u -> c : QueryForTasksCompletion
+c -> u : returns status
+
+@enduml

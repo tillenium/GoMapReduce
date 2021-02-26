@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+frame Execution {
+    node controller
+    collections workers
+
+    actor user
+
+    user -> controller : 1. starts controller (files, nreduce)
+
+    user -> workers : 2. Starts workers and provide (map, reduce) operations.
+
+    workers -> controller : 3. Asks for Map Jobs (Produces nReduce temp output files for each map job (task))
+
+    controller -> controller :  4. Intermediate Step to sort files (combines the output of nmap x nreduce files into n reduce files as sorted data with key)
+
+    workers -> controller : 4. Asks for Reduce Jobs
+}
+
+@enduml
