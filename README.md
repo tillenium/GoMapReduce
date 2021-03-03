@@ -2,16 +2,18 @@
 
 ### Installation
 ```shell
-make build
+make clean && make build
 ```
 
 ### Running instructions
 ```shell
-./build/bin/gomr <.so file with Map/Reduce operation> <files>
+./build/bin/gomr controller  <files>
+./build/bin/gomr worker <.so file with Map/Reduce operation>
 
 #example:
 
-./build/bin/gomr examples/word_count.so data/file1.txt data/file2.txt
+./build/gomr controller data/file1.txt data/file2.txt
+./build/gomr worker ./examples/word_count.so      
 ```
 
 ### Design Docs
